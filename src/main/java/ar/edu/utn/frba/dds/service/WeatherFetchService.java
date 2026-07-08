@@ -32,5 +32,6 @@ public class WeatherFetchService {
                 .build();
 
         registroClimaRepository.save(registroClima);
+        System.out.println(respuesta);
     }
 }
