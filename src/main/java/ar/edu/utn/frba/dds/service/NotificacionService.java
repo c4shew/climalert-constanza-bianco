@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.service;
 import ar.edu.utn.frba.dds.domain.Alerta;
 import ar.edu.utn.frba.dds.domain.RegistroClima;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,8 @@ import org.springframework.stereotype.Service;
 public class NotificacionService {
 
     private final JavaMailSender enviadoCorreo;
-
-    private static final String[] DESTINATARIOS = {
-            "admin@clima.com",
-            "emergencias@clima.com",
-            "meteorologia@clima.com"
-    };
+    @Value("${clima.mail.destinatarios}")
+    private String[] destinatarios;
 
     public void enviarAlerta(Alerta alerta) {
 
@@ -25,7 +22,7 @@ public class NotificacionService {
 
         SimpleMailMessage mensaje = new SimpleMailMessage();
 
-        mensaje.setTo(DESTINATARIOS);
+        mensaje.setTo(destinatarios);
         mensaje.setSubject("ALERTA CLIMÁTICA");
 
         mensaje.setText(
