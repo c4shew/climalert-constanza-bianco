@@ -10,7 +10,7 @@ public class WeatherApiClient {
 
     private final WebClient webClient;
 
-    @Value("${weather.api.key}")
+    @Value("${weather.api.key}") 
     private String apiKey;
     @Value("${weather.api.city}")
     private String ciudad;
